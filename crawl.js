@@ -1,3 +1,4 @@
+import { JSDOM } from 'jsdom'
 function normalizeURL(url) {
 	const urlObj = new URL(url)
 	const hostname = urlObj.hostname
@@ -9,4 +10,20 @@ function normalizeURL(url) {
 
 }
 
-export { normalizeURL }
+function getURLsFromHTML(htmlBody, baseURL) {
+	const dom = new JSDOM(htmlBody)
+	const anchor_tags = dom.window.document.querySelectorAll("a")
+	let urls = []
+	for (let a of anchor_tags) {
+
+		if (!URL.canParse(a.href) && !a.href.includes(baseURL)) {
+			urls.push(`${baseURL}${a.href}`)
+		} else {
+			urls.push(a.href)
+		}
+	}
+	return urls
+}
+
+
+export { normalizeURL, getURLsFromHTML }
