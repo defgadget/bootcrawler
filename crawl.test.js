@@ -40,7 +40,7 @@ test('html with no anchor tags', () => {
 
 test('get single url link from getURLsFromHTML', () => {
 	const html = '<html><body><h1>Heading</h1><a href="https://boot.dev"/></body></html>'
-	const links = getURLsFromHTML(html, "https://boot.dev")
+	const links = getURLsFromHTML(html, "https://boot.dev/")
 	const expected = ["https://boot.dev/"]
 	expect(links).toStrictEqual(expected)
 })
@@ -55,7 +55,7 @@ test('get multiple urls links from getURLsFromHTML', () => {
 
 test('get single relative url link from getURLsFromHTML', () => {
 	const html = '<html><body><h1>Heading</h1><a href="/path"/></body></html>'
-	const links = getURLsFromHTML(html, "https://boot.dev")
+	const links = getURLsFromHTML(html, "https://boot.dev/")
 	const expected = ["https://boot.dev/path"]
 	expect(links).toStrictEqual(expected)
 })
